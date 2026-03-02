@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  username  String   @unique
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  feedbacks Feedback[]
+  sales     Sale[]
+}
+
+model Feedback {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  rating      Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model Pajama {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  image       String
+  price       Float
+  season      String
+  type        String
+  gender      String
+  favorite    Boolean  @default(false)
+  onSale      Boolean  @default(false)
+  salePercent Float?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  sizes PajamaSize[]
+  sales SalePajama[]
+}
+
+model PajamaSize {
+  id            String @id @default(cuid())
+  size          String
+  stockQuantity Int
+
+  pajamaId String
+  pajama   Pajama @relation(fields: [pajamaId], references: [id], onDelete: Cascade)
+}
+
+model Sale {
+  id            String   @id @default(cuid())
+  buyerName     String
+  cpf           String
+  paymentMethod String
+  installments  Int      @default(1)
+  cardNumber    String?
+  totalAmount   Float
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  addressId String
+  address   Address @relation(fields: [addressId], references: [id])
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  pajamas SalePajama[]
+}
+
+model SalePajama {
+  id       String @id @default(cuid())
+  quantity Int
+  price    Float
+
+  saleId String
+  sale   Sale   @relation(fields: [saleId], references: [id])
+
+  pajamaId String
+  pajama   Pajama @relation(fields: [pajamaId], references: [id])
+
+  @@unique([saleId, pajamaId])
+}
+
+model Address {
+  id           String   @id @default(cuid())
+  zipCode      String
+  state        String
+  city         String
+  neighborhood String
+  address      String
+  number       String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  sales Sale[]
+}
