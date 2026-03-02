@@ -1,10 +1,15 @@
-import fastify from 'fastify'
-import { env } from './env'
+import { app } from "./app.js"
+import { env } from "./env/index.js";
 
-export const app = fastify({
-  logger: true,
-})
+const host = env.HOST; 
+const port = env.PORT; 
 
-app.listen({ port: env.PORT, host: '0.0.0.0' }).then(() => {
-  console.log(`Server rodando em http://localhost:${env.PORT}`)
-})
+app
+  .listen({
+    host,
+    port,
+  })
+  .then(() => {
+    const url = `http://localhost:${port}`;
+    console.log(`HTTP server running at: ${url}`);
+  });

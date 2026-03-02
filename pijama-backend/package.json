@@ -1,35 +1,37 @@
 {
   "name": "pijama-backend",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
-    "build": "tsup src --out-dir dist",
-    "start:dev": "node dist/server.js",
-    "format": "prettier --write \"src/**/*.ts\""
+    "start:dev": "tsx watch ./src/server.ts",
+    "start:prod": "node build/server.js",
+    "build": "tsup",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "prettier --check \"src/**/*.ts\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "@prisma/client": "^7.4.2",
-    "bcryptjs": "^3.0.3",
-    "dotenv": "^17.3.1",
-    "fastify": "^5.7.4",
-    "jsonwebtoken": "^9.0.3",
-    "zod": "^4.3.6"
-  },
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.6",
-    "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "^25.3.3",
-    "prettier": "^3.8.1",
-    "prisma": "^7.4.2",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "@fastify/jwt": "10.0.0",
+    "@types/bcryptjs": "2.4.6",
+    "@types/node": "25.3.0",
+    "@types/pg": "8.16.0",
+    "dotenv": "17.3.1",
+    "prettier": "3.8.1",
+    "prisma": "7.4.1",
+    "tsup": "8.5.1",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
   },
-  "_moduleAliases": {
-    "@": "dist"
+  "dependencies": {
+    "@prisma/adapter-pg": "7.4.1",
+    "@prisma/client": "7.4.1",
+    "bcryptjs": "3.0.3",
+    "fastify": "5.7.4",
+    "package": "1.0.1",
+    "pg": "8.18.0",
+    "zod": "4.3.6"
   }
 }
