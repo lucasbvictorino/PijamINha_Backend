@@ -1,0 +1,15 @@
+### Variables
+@apiUrl = http://localhost:{{$dotenv PORT}}
+
+### POST Register Researcher
+POST {{apiUrl}}/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Lucas V.",
+    "username": "lucasv",
+    "email": "lucas@example.com",
+    "password": "senha12345"
+}
+
+# http://localhost:3333/users
