@@ -21,10 +21,13 @@ model User {
 }
 
 model Feedback {
-  id          String   @id @default(cuid())
+  id          Int   @id @default(autoincrement())
+  publicId    String @unique @default(uuid())
+
   name        String
   description String
   rating      Float
+  
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
