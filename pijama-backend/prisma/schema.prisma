@@ -87,7 +87,8 @@ model Sale {
   userId Int
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  address Address?
+  addressId Int
+  address   Address @relation(fields: [addressId], references: [id], onDelete: Cascade)
 
   pajamas SalePajama[]
 
@@ -106,8 +107,7 @@ model Address {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  saleId Int  @unique
-  sale   Sale @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  sales Sale[]
 
   @@map("addresses")
 }
