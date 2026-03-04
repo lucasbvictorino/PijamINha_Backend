@@ -14,19 +14,19 @@ export const app = fastify()
 
 app.register(appRoutes)
 
-// app.setErrorHandler((error,request,reply) => {
-//     if (error instanceof ZodError){
-//         return reply.status(400).send({
-//             message: 'Validation error',
-//             issues: error.format(),
-//         })
-//     }
+app.setErrorHandler((error,request,reply) => {
+    if (error instanceof ZodError){
+        return reply.status(400).send({
+            message: 'Validation error',
+            issues: error.format(),
+        })
+    }
 
-//     if (error instanceof SyntaxError){
-//         return reply.status(400).send({
-//             message: 'Invalid JSON payload',
-//         })
-//     }
+    if (error instanceof SyntaxError){
+        return reply.status(400).send({
+            message: 'Invalid JSON payload',
+        })
+    }
 
-//     return reply.status(500).send({ message: 'Internal Server Error' })
-// })
+    return reply.status(500).send({ message: 'Internal Server Error' })
+})
