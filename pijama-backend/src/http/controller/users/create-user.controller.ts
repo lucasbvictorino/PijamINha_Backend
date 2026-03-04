@@ -1,10 +1,6 @@
-import { PrismaUsersRepository } from "@/repositories/prisma/users-prisma-repository.js"
 import { UserAlreadyExistsError } from "@/use-cases/errors/user-already-exists.js"
-import { makeCreateUserUseCase } from "@/use-cases/factories/make-create-user.js"
-import { CreateUserUseCase } from "@/use-cases/users/create-user.js"
-import { Prisma } from "@prisma/client/extension"
-import { FastifyReply } from "fastify"
-import { FastifyRequest } from "fastify/types/request.js"
+import { makeCreateUserUseCase } from "@/use-cases/factories/users/make-create-user.js"
+import { FastifyReply, FastifyRequest } from "fastify"
 import z from "zod"
 import { UserPresenter } from "../../presenters/user-presenter.js"
 
