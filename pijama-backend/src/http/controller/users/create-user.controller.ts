@@ -1,6 +1,6 @@
-import { env } from "@/env/index.js"
-import { prisma } from "@/lib/prisma.js"
-import { hash } from "bcryptjs"
+import { PrismaUsersRepository } from "@/repositories/prisma/users-prisma-repository.js"
+import { CreateUserUseCase } from "@/use-cases/users/create-user.js"
+import { Prisma } from "@prisma/client/extension"
 import { FastifyReply } from "fastify"
 import { FastifyRequest } from "fastify/types/request.js"
 import z from "zod"
@@ -18,15 +18,13 @@ export async function createUser(
 
     const { name, username, email, password } = registerBodySchema.parse(request.body)
 
-    const passwordHash = await hash(password, env.HASH_SALT_ROUNDS)
+    const usersRepository = new PrismaUsersRepository()
 
-    const user = await prisma.user.create({
-        data: {
-            name,
-            username,
-            email,
-            passwordHash,
-        }
+    const { user } = await new CreateUserUseCase(usersRepository).execute({
+        name,
+        username,
+        email,
+        password
     })
     
     return reply.status(201).send(user)
