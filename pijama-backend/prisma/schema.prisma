@@ -98,12 +98,14 @@ model Sale {
 model Address {
   id           Int      @id @default(autoincrement())
   publicId     String   @unique @default(uuid()) @map("public_id")
+
   zipCode      String
   state        String
   city         String
   neighborhood String
-  address      String
+  address      String 
   number       String
+
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
