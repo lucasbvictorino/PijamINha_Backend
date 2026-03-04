@@ -3,25 +3,22 @@ import { makeRegisterFeedbackUseCase } from "@/use-case/factories/feedback/make-
 import { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
 import "@fastify/jwt"
+import { makeDeleteFeedbackUseCase } from "@/use-case/factories/feedback/make-register-delete-use-case";
 
 export async function registerFeedback (request: FastifyRequest, reply: FastifyReply){
     try{
 
-        // não é necessário passar o nome do usuário por aqui, pois o usuário estará logado.
-        const registerBodySchema = z.object({
-            description: z.string(),
-            rating: z.number()
+        // o id publico de feedback será colhido na url
+        const registerParamsSchema = z.object({
+            publicId: z.string()
         })
 
-        const { description, rating } = registerBodySchema.parse(request.body)
+        const { publicId } = registerParamsSchema.parse(request.params)
 
         const idUsuario = request.user.sub
 
-        const registerFeedbackUseCase = makeRegisterFeedbackUseCase()
-        const feedback = await registerFeedbackUseCase.execute( idUsuario, {
-            description,
-            rating
-        })
+        const deleteFeedbackUseCase = makeDeleteFeedbackUseCase()
+        const feedback = await deleteFeedbackUseCase.execute( idUsuario, publicId )
 
         return reply.status(201).send({
             message: "Feedback criado com sucesso",

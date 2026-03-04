@@ -6,4 +6,6 @@ export interface feedbacksRepository {
     update( id: number, description: string, rating: number ): Promise<Feedback|null>
 
     findBy( where: Prisma.FeedbackWhereUniqueInput ): Promise<Feedback|null>
+
+    delete( id: number ): Promise<Feedback>
 }

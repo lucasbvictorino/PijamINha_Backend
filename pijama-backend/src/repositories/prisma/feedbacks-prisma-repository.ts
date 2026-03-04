@@ -29,4 +29,10 @@ export class PrismaFeedbacksRepository implements feedbacksRepository {
     async findBy ( where: Prisma.FeedbackWhereUniqueInput ){
        return await prisma.feedback.findUnique({ where })
     }
+
+    async delete ( id: number ){
+        return await prisma.feedback.delete({
+            where: { id }
+        })
+    }
 }
