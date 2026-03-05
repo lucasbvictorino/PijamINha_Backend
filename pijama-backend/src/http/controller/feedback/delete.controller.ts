@@ -5,7 +5,7 @@ import z from "zod";
 import "@fastify/jwt"
 import { makeDeleteFeedbackUseCase } from "@/use-case/factories/feedback/make-register-delete-use-case";
 
-export async function registerFeedback (request: FastifyRequest, reply: FastifyReply){
+export async function deleteFeedback (request: FastifyRequest, reply: FastifyReply){
     try{
 
         // o id publico de feedback será colhido na url
