@@ -1,3 +1,4 @@
+import { SalePresenter } from "@/http/presenters/sale-presenter.js";
 import { makeRegisterAdressUseCase } from "@/use-case/factories/address/make-register-use-case.js";
 import { makeRegisterSaleUseCase } from "@/use-case/factories/sale/make-register-use-case.js";
 import { FastifyRequest } from "fastify";
@@ -15,7 +16,6 @@ export async function registerSale (request: FastifyRequest, reply: FastifyReply
                 paymentMethod: z.string(),
                 installments: z.number().optional().default(1),
                 cardNumber: z.string().optional(),
-                totalAmount: z.number()
             }),
             address: z.object ({
                 zipCode: z.string(),
@@ -31,6 +31,7 @@ export async function registerSale (request: FastifyRequest, reply: FastifyReply
                 quantity: z.number(),
                 price: z.number()
             }))
+
         })
 
         const { address, sale, sale_pajamas } = registerSaleBodySchema.parse(request.body)
@@ -47,7 +48,6 @@ export async function registerSale (request: FastifyRequest, reply: FastifyReply
             paymentMethod: sale.paymentMethod,
             installments: sale.installments,
             cardNumber: sale.cardNumber,
-            totalAmount: sale.totalAmount,
             userId: user.id,
             addressId: endereço.id,
             pajamas: sale_pajamas
@@ -60,6 +60,8 @@ export async function registerSale (request: FastifyRequest, reply: FastifyReply
 
 
     } catch (error){
-
+        if (error instanceof Error){
+            return reply.status(400).send({ message: error.message})
+        }
     }
 }

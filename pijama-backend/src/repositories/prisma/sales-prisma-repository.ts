@@ -1,7 +1,6 @@
-import { Prisma, Sale } from "@/@types/prisma/index.js";
-import { addressRepository } from "../address-repository.js";
-import { prisma } from "@/lib/prisma.js";
-import { SalesRepository } from "../sales-repository.js";
+import { Prisma, Sale } from "@/@types/prisma/index.js"
+import { prisma } from "@/lib/prisma.js"
+import { SalesRepository } from "../sales-repository.js"
 
 export class PrismaSaleRepository implements SalesRepository {
 
@@ -19,6 +18,7 @@ export class PrismaSaleRepository implements SalesRepository {
                 installments: data.installments,
                 cardNumber: data.cardNumber,
                 totalAmount: data.totalAmount,
+                totalPajamas: data.totalPajamas,
                 user: data.user,
                 address: data.address,
                 pajamas: { create: pajamas.map((item) => ({
@@ -26,19 +26,22 @@ export class PrismaSaleRepository implements SalesRepository {
                     quantity: item.quantity,
                     price: item.price
                 }))}
-            }
+            },
+            include : { address : true }
         })
     }
     
     async findById(publicId: string) {
         return prisma.sale.findUnique({
-            where: { publicId }
+            where: { publicId },
+            include : { address: true }
         })
     }
 
     async delete( id: number ){
         return prisma.sale.delete({
-            where:{ id }
+            where: { id },
+            include : { address: true }
         })
     }
 }

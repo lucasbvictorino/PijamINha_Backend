@@ -81,6 +81,7 @@ model Sale {
   installments  Int      @default(1)
   cardNumber    String?
   totalAmount   Float
+  totalPajamas  Int 
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 

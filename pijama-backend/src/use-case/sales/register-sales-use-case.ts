@@ -1,5 +1,4 @@
-import { Sale } from "@/@types/prisma/index.js"
-import { SalesRepository } from "@/repositories/sales-repository.js"
+import { SalesRepository, SaleWithAddress } from "@/repositories/sales-repository.js"
 
 interface registerSalesUseCaseRequest {
     buyerName: string,
@@ -7,7 +6,6 @@ interface registerSalesUseCaseRequest {
     paymentMethod: string,
     installments: number,
     cardNumber?: string | null,
-    totalAmount: number,
     userId: string,
     addressId: number,
     pajamas: {
@@ -21,12 +19,16 @@ export class RegisterSaleUseCase {
 
     constructor ( private salesRepository: SalesRepository){}
 
-    async execute (request: registerSalesUseCaseRequest): Promise<Sale> {
+    async execute (request: registerSalesUseCaseRequest): Promise<SaleWithAddress> {
 
         const user = await this.usersRepository.findBy({ publicId: request.userId })
 
         let precoTotal = 0
-        for (const pijamas of request.pajamas) precoTotal += pijamas.price
+        let totalPijamas = 0
+        for (const pijamas of request.pajamas) {
+            precoTotal += pijamas.price
+            totalPijamas += pijamas.quantity
+        }
 
         const venda = await this.salesRepository.create(
             {
@@ -36,6 +38,7 @@ export class RegisterSaleUseCase {
                 installments: request.installments,
                 cardNumber: request.cardNumber,
                 totalAmount: precoTotal,
+                totalPajamas: totalPijamas,
                 user : {
                     connect: { id: user.id }
                 },

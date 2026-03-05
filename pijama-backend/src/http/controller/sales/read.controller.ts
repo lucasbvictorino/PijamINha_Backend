@@ -1,5 +1,5 @@
 import { SalePresenter } from "@/http/presenters/sale-presenter.js";
-import { makeDeleteSaleUseCase } from "@/use-case/factories/sale/make-delete-use-case.js";
+import { makeReadSaleUseCase } from "@/use-case/factories/sale/make-read-use-case.js";
 import { FastifyRequest } from "fastify";
 import { FastifyReply } from "fastify/types/reply.js";
 import z from "zod";
@@ -13,14 +13,13 @@ export async function registerSale (request: FastifyRequest, reply: FastifyReply
 
         const { publicId } = deleteSaleBodySchema.parse(request.params)
 
-        const user = request.user.sub
-
-        const deleteSaleUseCase = makeDeleteSaleUseCase()
-        const venda = await deleteSaleUseCase.execute(publicId, user)
+        const readSaleUseCase = makeReadSaleUseCase()
+        const venda = await readSaleUseCase.execute(publicId)
 
         return reply.status(201).send({
-            message:"Venda deletada com sucesso",
+            message:"Venda acessada com sucesso",
             like: SalePresenter.toHTTP(venda)
+
         })
 
     } catch (error){

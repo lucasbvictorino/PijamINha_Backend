@@ -1,11 +1,10 @@
-import { Sale } from "@/@types/prisma/index.js"
-import { SalesRepository } from "@/repositories/sales-repository.js"
+import { SalesRepository, SaleWithAddress } from "@/repositories/sales-repository.js"
 
 export class DeleteSaleUseCase {
 
     constructor ( private salesRepository: SalesRepository){}
 
-    async execute ( publicIdSale: string, publicIdUser: string ): Promise<Sale> {
+    async execute ( publicIdSale: string, publicIdUser: string ): Promise<SaleWithAddress> {
 
         const user = await this.usersRepository.findBy({ publicId: publicIdUser })
 
