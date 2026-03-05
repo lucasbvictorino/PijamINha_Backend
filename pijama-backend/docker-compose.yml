@@ -1,5 +1,4 @@
 services:
-
   db:
     image: postgres:18-alpine3.23
 
@@ -10,7 +9,7 @@ services:
 
     ports:
       - '${POSTGRES_PORT:-5432}:5432'
-    
+
     volumes:
       - db:/var/lib/postgresql/data
 
@@ -22,11 +21,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-  
-volumes: 
-    db:
-      driver: local
-  
+
+volumes:
+  db:
+    driver: local
+
 networks:
-    app-network:
-      driver: bridge
+  app-network:
+    driver: bridge
