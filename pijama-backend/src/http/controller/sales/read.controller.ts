@@ -4,7 +4,7 @@ import { FastifyRequest } from "fastify";
 import { FastifyReply } from "fastify/types/reply.js";
 import z from "zod";
 
-export async function registerSale (request: FastifyRequest, reply: FastifyReply){
+export async function readSale (request: FastifyRequest, reply: FastifyReply){
     try {
 
         const deleteSaleBodySchema = z.object({

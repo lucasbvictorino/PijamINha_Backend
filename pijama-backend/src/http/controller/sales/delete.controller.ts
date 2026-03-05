@@ -4,14 +4,14 @@ import { FastifyRequest } from "fastify";
 import { FastifyReply } from "fastify/types/reply.js";
 import z from "zod";
 
-export async function registerSale (request: FastifyRequest, reply: FastifyReply){
+export async function deleteSale (request: FastifyRequest, reply: FastifyReply){
     try {
 
         const deleteSaleBodySchema = z.object({
-            publicId: z.string()
+            publicPostId: z.string()
         }) 
 
-        const { publicId } = deleteSaleBodySchema.parse(request.params)
+        const { publicPostId: publicId } = deleteSaleBodySchema.parse(request.params)
 
         const user = request.user.sub
 
