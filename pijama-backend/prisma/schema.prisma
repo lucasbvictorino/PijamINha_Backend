@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  output = "../src/@types/prisma"
+  output   = "../src/@types/prisma"
 }
 
 datasource db {
@@ -13,8 +13,8 @@ enum USER_ROLE {
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  publicId String @unique @default(uuid(7)) @map("public_id")
+  id        Int      @id @default(autoincrement())
+  publicId  String   @unique @default(uuid()) @map("public_id")
   name      String
   username  String   @unique
   email     String   @unique
@@ -30,23 +30,23 @@ model User {
 }
 
 model Feedback {
-  id Int @id @default(autoincrement())
-  publicId String @unique @default(uuid(7)) @map("public_id")
+  id          Int      @id @default(autoincrement())
+  publicId    String   @unique @default(uuid()) @map("public_id")
   name        String
   description String
   rating      Float
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  userId Int
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int?
+  user   User? @relation(fields: [userId], references: [id], onDelete: SetNull)
 
   @@map("feedbacks")
 }
 
 model Pajama {
-  id Int @id @default(autoincrement())
-  publicId String @unique @default(uuid(7)) @map("public_id")
+  id          Int      @id @default(autoincrement())
+  publicId    String   @unique @default(uuid()) @map("public_id")
   name        String
   description String
   image       String
@@ -67,20 +67,20 @@ model Pajama {
 }
 
 model PajamaSize {
-  id Int @id @default(autoincrement())
-  publicId String @unique @default(uuid(7)) @map("public_id")
+  id            Int    @id @default(autoincrement())
+  publicId      String @unique @default(uuid()) @map("public_id")
   size          String
   stockQuantity Int
 
   pajamaId Int
-  pajama Pajama @relation(fields: [pajamaId], references: [id], onDelete: Cascade)
+  pajama   Pajama @relation(fields: [pajamaId], references: [id], onDelete: Cascade)
 
   @@map("pajama_sizes")
 }
 
 model Sale {
-  id Int @id @default(autoincrement())
-  publicId String @unique @default(uuid(7)) @map("public_id")
+  id            Int      @id @default(autoincrement())
+  publicId      String   @unique @default(uuid()) @map("public_id")
   buyerName     String
   cpf           String
   paymentMethod String
@@ -90,37 +90,20 @@ model Sale {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  addressId Int
-  address Address @relation(fields: [addressId], references: [id], onDelete: Cascade)
-
   userId Int
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  addressId Int
+  address   Address @relation(fields: [addressId], references: [id], onDelete: Cascade)
 
   pajamas SalePajama[]
 
   @@map("sales")
 }
 
-model SalePajama {
-  id Int @id @default(autoincrement())
-  publicId String @unique @default(uuid(7)) @map("public_id")
-  quantity Int
-  price    Float
-
-  saleId Int
-  sale Sale @relation(fields: [saleId], references: [id], onDelete: Cascade)
-
-  pajamaId Int
-  pajama Pajama @relation(fields: [pajamaId], references: [id], onDelete: Cascade)
-
-  @@unique([saleId, pajamaId])
-
-  @@map("sale_pajamas")
-}
-
 model Address {
-  id Int @id @default(autoincrement())
-  publicId String @unique @default(uuid(7)) @map("public_id")
+  id           Int      @id @default(autoincrement())
+  publicId     String   @unique @default(uuid()) @map("public_id")
   zipCode      String
   state        String
   city         String
@@ -133,4 +116,20 @@ model Address {
   sales Sale[]
 
   @@map("addresses")
+}
+
+model SalePajama {
+  id       Int    @id @default(autoincrement())
+  publicId String @unique @default(uuid()) @map("public_id")
+  quantity Int
+  price    Float
+
+  saleId Int
+  sale   Sale @relation(fields: [saleId], references: [id], onDelete: Cascade)
+
+  pajamaId Int
+  pajama   Pajama @relation(fields: [pajamaId], references: [id], onDelete: Cascade)
+
+  @@unique([saleId, pajamaId])
+  @@map("sale_pajamas")
 }
