@@ -1,9 +1,7 @@
+import { Prisma } from "../@types/prisma/index.js";
 import { prisma } from "../lib/prisma.js";
 
 export class PajamasRepository {
-  // deleteById(id: number) {
-  //     throw new Error("Method not implemented.");
-  // }
   async create(data: {
     name: string;
     description: string;
@@ -21,9 +19,9 @@ export class PajamasRepository {
     });
   }
 
-  async findById(id: number) {
+  async findBy(where: Prisma.PajamaWhereUniqueInput) {
     return prisma.pajama.findUnique({
-      where: { id },
+      where,
       include: { sizes: true },
     });
   }
@@ -37,9 +35,9 @@ export class PajamasRepository {
     });
   }
 
-  async delete(id: number) {
+  async delete(where: Prisma.PajamaWhereUniqueInput) {
     return prisma.pajama.delete({
-      where: { id },
+      where,
     });
   }
 }

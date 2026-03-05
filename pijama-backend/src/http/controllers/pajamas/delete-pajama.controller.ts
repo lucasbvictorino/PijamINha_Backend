@@ -7,18 +7,18 @@ export async function deletePajamaController(
   reply: FastifyReply
 ) {
   const paramsSchema = z.object({
-    id: z.coerce.number().int().positive(),
+    publicId: z.string().uuid(),
   });
 
-  const { id } = paramsSchema.parse(request.params);
+  const { publicId } = paramsSchema.parse(request.params);
 
   const useCase = makeDeletePajamaUseCase();
 
-  const { deleted } = await useCase.execute({ id });
+  const { deleted } = await useCase.execute({ publicId });
 
   if (!deleted) {
     return reply.status(404).send({ message: "Pajama not found" });
   }
 
-  return reply.status(204).send();
+  return reply.status(200).send();
 }

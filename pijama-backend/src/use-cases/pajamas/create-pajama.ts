@@ -1,6 +1,6 @@
 import { prisma } from "../../lib/prisma.js";
 import { PajamasRepository } from "../../repositories/pajama-repository.js";
-import { PajamaSizesRepository } from "../../repositories/prisma/pajama-sizes-repository.js";
+import { PajamaSizesRepository } from "../../repositories/pajama-sizes-repository.js";
 
 interface CreatePajamaRequest {
   name: string;

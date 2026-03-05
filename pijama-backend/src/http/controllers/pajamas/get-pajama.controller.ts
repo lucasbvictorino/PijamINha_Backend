@@ -7,13 +7,13 @@ export async function getPajamaController(
   reply: FastifyReply
 ) {
   const paramsSchema = z.object({
-    id: z.coerce.number().int().positive(),
+    publicId: z.string().uuid(),
   });
 
-  const { id } = paramsSchema.parse(request.params);
+  const { publicId } = paramsSchema.parse(request.params);
 
   const useCase = makeGetPajamaUseCase();
-  const { pajama } = await useCase.execute({ id });
+  const { pajama } = await useCase.execute({ publicId });
 
   if (!pajama) {
     return reply.status(404).send({ message: "Pajama not found" });

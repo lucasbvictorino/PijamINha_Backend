@@ -8,7 +8,7 @@ import { updatePajamaStockController } from "./update-pajama-stock.controller";
 export async function pajamaRoutes(app: FastifyInstance) {
   app.post("/", createPajamaController);
   app.get("/", listPajamasController);
-  app.get("/:id", getPajamaController);
-  app.patch("/:id/stock", updatePajamaStockController);
-  app.delete("/:id", deletePajamaController);
+  app.get("/:publicId", getPajamaController);
+  app.patch("/:publicId/stock", updatePajamaStockController);
+  app.delete("/:publicId", deletePajamaController);
 }
