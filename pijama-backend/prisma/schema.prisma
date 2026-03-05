@@ -7,13 +7,19 @@ datasource db {
   provider = "postgresql"
 }
 
+enum USER_ROLE {
+  ADMIN
+  DEFAULT
+}
+
 model User {
   id        Int      @id @default(autoincrement())
   publicId  String   @unique @default(uuid()) @map("public_id")
   name      String
   username  String   @unique
   email     String   @unique
-  password  String
+  passwordHash  String @map("password_hash")
+  role     USER_ROLE @default(DEFAULT)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -29,6 +35,7 @@ model Feedback {
   name        String
   description String
   rating      Float
+  
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
