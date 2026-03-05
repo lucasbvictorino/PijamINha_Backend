@@ -1,4 +1,4 @@
-import { Prisma } from "@/@types/prisma/index.js";
+import { Prisma, Sale } from "@/@types/prisma/index.js";
 import { addressRepository } from "../address-repository.js";
 import { prisma } from "@/lib/prisma.js";
 import { SalesRepository } from "../sales-repository.js";
@@ -28,5 +28,17 @@ export class PrismaSaleRepository implements SalesRepository {
                 }))}
             }
         })
-        }
+    }
+    
+    async findById(publicId: string) {
+        return prisma.sale.findUnique({
+            where: { publicId }
+        })
+    }
+
+    async delete( id: number ){
+        return prisma.sale.delete({
+            where:{ id }
+        })
+    }
 }

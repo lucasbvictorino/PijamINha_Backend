@@ -8,4 +8,8 @@ export interface SalesRepository {
             quantity: number,
             price: number
         }[]): Promise<Sale>
+
+    findById ( publicId: string ): Promise<Sale | null>
+
+    delete ( id: number ): Promise<Sale>
 }
