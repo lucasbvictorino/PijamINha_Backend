@@ -1,4 +1,3 @@
-import { User } from "@/@types/prisma/index.js";
 import { UsersRepository } from "@/repositories/users-repository.js";
 import { ResourceNotFoundError } from "../errors/resource-not-found-error.js";
 

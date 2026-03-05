@@ -1,6 +1,7 @@
-import { PrismaFeedbacksRepository } from "@/repositories/prisma/feedbacks-prisma-repository"
-import { PrismaUsersRepository } from "@/repositories/prisma/users-prisma-repository"
-import { DeleteFeedbacksUseCase } from "@/use-cases/feedbacks/delete-use-case"
+import { PrismaFeedbacksRepository } from "@/repositories/prisma/feedbacks-prisma-repository.js"
+import { PrismaUsersRepository } from "@/repositories/prisma/users-prisma-repository.js"
+import { DeleteFeedbacksUseCase } from "@/use-cases/feedbacks/delete-use-case.js"
+
 
 export function makeDeleteFeedbackUseCase() {
     const feedbackRepository = new PrismaFeedbacksRepository()

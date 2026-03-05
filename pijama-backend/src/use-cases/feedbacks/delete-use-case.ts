@@ -1,6 +1,7 @@
-import { UsersRepository } from "@/repositories/users-repository"
-import type { Feedback } from "../../@types/prisma"
+
+import { Feedback } from '@/@types/prisma/index.js'
 import { feedbacksRepository } from '../../repositories/feedbacks-repository.js'
+import { UsersRepository } from '@/repositories/users-repository.js'
 
 export class DeleteFeedbacksUseCase {
 

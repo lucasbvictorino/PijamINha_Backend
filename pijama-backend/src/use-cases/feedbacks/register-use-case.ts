@@ -1,6 +1,6 @@
-import { UsersRepository } from "@/repositories/users-repository"
-import type { Feedback } from "../../@types/prisma"
+import { UsersRepository } from '@/repositories/users-repository.js'
 import { feedbacksRepository } from '../../repositories/feedbacks-repository.js'
+import { Feedback } from '@/@types/prisma/index.js'
 
 interface registerFeedbackUseCaseRequest {
     description: string,

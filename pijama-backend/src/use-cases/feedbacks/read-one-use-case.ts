@@ -1,4 +1,4 @@
-import type { Feedback } from "../../@types/prisma"
+import { Feedback } from '@/@types/prisma/index.js'
 import { feedbacksRepository } from '../../repositories/feedbacks-repository.js'
 
 export class ReadOneFeedbackUseCase {
