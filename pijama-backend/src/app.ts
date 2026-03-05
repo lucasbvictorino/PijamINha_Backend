@@ -1,10 +1,8 @@
 import fastify from 'fastify';
-import { appRoutes } from './http/controller/routes.js';
-import z, { ZodError } from 'zod';
+import { appRoutes } from './http/controllers/routes.js';
+import { ZodError } from 'zod';
 import fastifyJWT from '@fastify/jwt';
 import { env } from './env/index.js';
-import { request } from 'node:http';
-import { prisma } from './lib/prisma.js';
 
 export const app = fastify()
 
@@ -14,7 +12,7 @@ app.register(fastifyJWT, {
 
 app.register(appRoutes)
 
-app.setErrorHandler((error,request,reply) => {
+app.setErrorHandler((error, _request,reply) => {
     if (error instanceof ZodError){
         return reply.status(400).send({
             message: 'Validation error',
