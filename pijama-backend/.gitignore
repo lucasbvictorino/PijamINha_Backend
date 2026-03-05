@@ -6,3 +6,5 @@ build
 /src/@types/prisma
 
 /src/generated/prisma
+
+postman-collection.json
