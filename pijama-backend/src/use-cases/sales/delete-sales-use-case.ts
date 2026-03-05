@@ -16,8 +16,7 @@ export class DeleteSaleUseCase {
         if (!user) throw new ResourceNotFoundError()
 
         const sale = await this.salesRepository.findById(publicIdSale)
-
-        
+  
         if (!sale) throw new ResourceNotFoundError()
 
         if (sale.userId != user.id) throw new Error ("Você náo tem autorização para isso")

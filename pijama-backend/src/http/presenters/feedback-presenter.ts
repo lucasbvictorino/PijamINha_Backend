@@ -1,6 +1,6 @@
 import type { Feedback } from "@/@types/prisma/index.js"
 
-type HTTPPost = {
+type HTTPFeedback = {
     id: string,
 
     description: string,
@@ -11,11 +11,11 @@ type HTTPPost = {
 }
 
 export class FeedbackPresenter {
-    static toHTTP (post: Feedback): HTTPPost
-    static toHTTP (posts: Feedback[]): HTTPPost[]
-    static toHTTP (input: Feedback | Feedback[]): HTTPPost | HTTPPost[] {
+    static toHTTP (feedback: Feedback): HTTPFeedback
+    static toHTTP (feedbacks: Feedback[]): HTTPFeedback[]
+    static toHTTP (input: Feedback | Feedback[]): HTTPFeedback | HTTPFeedback[] {
         if (Array.isArray(input)) {
-            return input.map((post) => this.toHTTP(post))
+            return input.map((feedback) => this.toHTTP(feedback))
         }
 
         return {

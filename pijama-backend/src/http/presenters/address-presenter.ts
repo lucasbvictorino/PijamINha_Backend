@@ -1,6 +1,6 @@
 import type { Address } from "@/@types/prisma/index.js"
 
-type HTTPUser = {
+type HTTPAddress = {
     CEP: string
     Estado: string
     Vizinhança: string
@@ -9,9 +9,9 @@ type HTTPUser = {
 }
 
 export class AddressPresenter {
-    static toHTTP (address: Address): HTTPUser
-    static toHTTP (addresses: Address[]): HTTPUser[]
-    static toHTTP (input: Address | Address[]): HTTPUser | HTTPUser[] {
+    static toHTTP (address: Address): HTTPAddress
+    static toHTTP (addresses: Address[]): HTTPAddress[]
+    static toHTTP (input: Address | Address[]): HTTPAddress | HTTPAddress[] {
         if (Array.isArray(input)) {
             return input.map((address) => this.toHTTP(address))
         }

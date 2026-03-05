@@ -1,7 +1,7 @@
 import type { SaleWithAddress } from "@/repositories/sales-repository.js"
 import { AddressPresenter } from "./address-presenter.js"
 
-type HTTPUser = {
+type HTTPSale = {
     Endereço : {
         CEP: string
         Estado: string
@@ -17,9 +17,9 @@ type HTTPUser = {
 }
 
 export class SalePresenter {
-    static toHTTP (sale: SaleWithAddress): HTTPUser
-    static toHTTP (sales: SaleWithAddress[]): HTTPUser[]
-    static toHTTP (input: SaleWithAddress | SaleWithAddress[]): HTTPUser | HTTPUser[] {
+    static toHTTP (sale: SaleWithAddress): HTTPSale
+    static toHTTP (sales: SaleWithAddress[]): HTTPSale[]
+    static toHTTP (input: SaleWithAddress | SaleWithAddress[]): HTTPSale | HTTPSale[] {
         if (Array.isArray(input)) {
             return input.map((sale) => this.toHTTP(sale))
         }

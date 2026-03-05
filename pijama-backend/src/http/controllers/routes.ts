@@ -8,5 +8,5 @@ export async function appRoutes (app: FastifyInstance) {
     app.register(userRoutes, { prefix: '/users' })
     app.register(feedbackRoutes, { prefix: '/feedback' })
     app.register(pajamaRoutes, { prefix: '/pajamas' });
-    app.register(saleRoutes, { prefix: '/sale'})
+    app.register(saleRoutes, { prefix: '/sales'})
 }

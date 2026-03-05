@@ -1,4 +1,3 @@
-import { Sale } from "@/@types/prisma/index.js"
 import { SalesRepository, SaleWithAddress } from "@/repositories/sales-repository.js"
 import { ResourceNotFoundError } from "../errors/resource-not-found-error.js"
 
