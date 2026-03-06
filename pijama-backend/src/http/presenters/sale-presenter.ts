@@ -5,6 +5,7 @@ type HTTPSale = {
     Endereço : {
         CEP: string
         Estado: string
+        Cidade: string
         Vizinhança: string
         Rua: string
         Numero: string

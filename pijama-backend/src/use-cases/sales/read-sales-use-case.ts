@@ -7,7 +7,7 @@ export class ReadSaleUseCase {
 
     async execute ( publicIdSale: string ): Promise<SaleWithAddress> {
 
-        const sale = await this.salesRepository.findById(publicIdSale)
+        const sale = await this.salesRepository.findBy({ publicId: publicIdSale })
 
         if (!sale) throw new ResourceNotFoundError()
 

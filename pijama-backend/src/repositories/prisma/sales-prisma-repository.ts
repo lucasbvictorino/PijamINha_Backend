@@ -31,9 +31,9 @@ export class PrismaSaleRepository implements SalesRepository {
         })
     }
     
-    async findById(publicId: string): Promise<SaleWithAddress | null> {
+    async findBy(where: Prisma.SaleWhereUniqueInput): Promise<SaleWithAddress | null> {
         return prisma.sale.findUnique({
-            where: { publicId },
+            where,
             include : { address: true }
         })
     }
@@ -64,10 +64,22 @@ export class PrismaSaleRepository implements SalesRepository {
         })
     }
 
+    async countByAddressId( addressId: number ): Promise<number> {
+        return prisma.sale.count({ where: { addressId } })
+    }
+
     async delete( id: number ): Promise<SaleWithAddress> {
         return prisma.sale.delete({
             where: { id },
             include : { address: true }
+        })
+    }
+
+    async update( id: number, data: Prisma.SaleUncheckedUpdateInput ): Promise<SaleWithAddress> {
+        return prisma.sale.update({
+            where: { id },
+            data,
+            include: { address: true }
         })
     }
 }

@@ -1,9 +1,10 @@
 import { FastifyInstance } from "fastify"
-import { registerFeedback } from "./register.controller"
-import { listFeedback } from "./list.controller"
-import { readFeedback } from "./read-one.controller"
-import { deleteFeedback } from "./delete.controller"
 import { verifyJWT } from "@/http/middlewares/verify-jwt.js"
+import { registerFeedback } from "./register.controller.js"
+import { listFeedback } from "./list.controller.js"
+import { readFeedback } from "./read-one.controller.js"
+import { deleteFeedback } from "./delete.controller.js"
+import { updateFeedback } from "./update.controller.js"
 
 export async function feedbackRoutes (app: FastifyInstance) {
     app.post('/', { onRequest: [verifyJWT] }, registerFeedback)
@@ -11,5 +12,6 @@ export async function feedbackRoutes (app: FastifyInstance) {
     app.get('/', listFeedback)
     app.get('/:publicId', readFeedback)
 
+    app.patch('/:publicId', { onRequest: [verifyJWT] }, updateFeedback)
     app.delete('/:publicId', { onRequest: [verifyJWT] }, deleteFeedback)
 }

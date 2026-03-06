@@ -8,8 +8,8 @@ export async function listSales (request: FastifyRequest, reply: FastifyReply){
     try{
 
         const listBodySchema = z.object({
-            page: z.number().optional(),
-            limit: z.number().optional()
+            page: z.coerce.number().optional(),
+            limit: z.coerce.number().optional()
         })
 
         const { page, limit } = listBodySchema.parse(request.query)

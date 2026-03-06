@@ -13,4 +13,8 @@ export class PrismaAddressRepository implements addressRepository {
     async findBy( where: Prisma.AddressWhereUniqueInput ) {
         return await prisma.address.findUnique({ where })
     }
+
+    async delete( id: number ) {
+        return await prisma.address.delete({ where: { id } })
+    }
 }

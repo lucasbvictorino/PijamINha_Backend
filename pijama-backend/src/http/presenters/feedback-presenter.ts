@@ -2,6 +2,7 @@ import type { Feedback } from "@/@types/prisma/index.js"
 
 type HTTPFeedback = {
     id: string,
+    name: string,
 
     description: string,
     rating: number,
@@ -20,10 +21,9 @@ export class FeedbackPresenter {
 
         return {
             id: input.publicId,
-
+            name: input.name,
             description: input.description,
             rating: input.rating,
-
             createdAt: input.createdAt,
             updatedAt: input.updatedAt
         }

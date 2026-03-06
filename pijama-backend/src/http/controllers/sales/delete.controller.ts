@@ -20,7 +20,7 @@ export async function deleteSale (request: FastifyRequest, reply: FastifyReply){
 
         return reply.status(200).send({
             message:"Venda deletada com sucesso",
-            like: SalePresenter.toHTTP(venda)
+            sale: SalePresenter.toHTTP(venda)
         })
 
     } catch (error){

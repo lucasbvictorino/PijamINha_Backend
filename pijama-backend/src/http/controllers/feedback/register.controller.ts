@@ -1,13 +1,13 @@
-import { FeedbackPresenter } from "@/http/presenters/feedback-presenter";
-import { makeRegisterFeedbackUseCase } from "@/use-cases/factories/feedbacks/make-register-feedback-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
 import "@fastify/jwt"
+import { makeRegisterFeedbackUseCase } from "@/use-cases/factories/feedbacks/make-register-feedback-use-case.js";
+import { FeedbackPresenter } from "@/http/presenters/feedback-presenter.js";
+import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error.js";
 
 export async function registerFeedback (request: FastifyRequest, reply: FastifyReply){
     try{
 
-        // não é necessário passar o nome do usuário por aqui, pois o usuário estará logado.
         const registerBodySchema = z.object({
             description: z.string(),
             rating: z.number()
@@ -29,6 +29,7 @@ export async function registerFeedback (request: FastifyRequest, reply: FastifyR
 
         })
     } catch (error) {
+        if (error instanceof ResourceNotFoundError) return reply.status(404).send({ message: error.message })
         if (error instanceof Error) return reply.status(400).send({ message: error.message})
     }
 }

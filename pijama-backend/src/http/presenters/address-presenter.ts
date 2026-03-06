@@ -3,6 +3,7 @@ import type { Address } from "@/@types/prisma/index.js"
 type HTTPAddress = {
     CEP: string
     Estado: string
+    Cidade: string
     Vizinhança: string
     Rua: string
     Numero: string
@@ -19,6 +20,7 @@ export class AddressPresenter {
         return {
             CEP: input.zipCode,
             Estado: input.state,
+            Cidade: input.city,
             Vizinhança: input.neighborhood,
             Rua: input.address,
             Numero: input.number

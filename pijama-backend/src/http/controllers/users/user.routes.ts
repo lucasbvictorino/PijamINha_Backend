@@ -15,11 +15,9 @@ export async function userRoutes(app: FastifyInstance) {
     app.get('/:publicId', getUser)
     app.get('/', listUsers)
 
-    // Rotas apenas para ADMIN
     app.delete('/:publicId', { onRequest: [verifyJWT, verifyUserRole(['ADMIN'])] }, deleteUser)
     app.patch('/:publicId', { onRequest: [verifyJWT, verifyUserRole(['ADMIN'])] }, updateUser)
 
-    // User profile routes
     app.get('/me', { onRequest: [verifyJWT] }, getUserProfile)
     app.delete('/me', { onRequest: [verifyJWT] }, deleteUserProfile)
     app.patch('/me', { onRequest: [verifyJWT] }, updateUserProfile)

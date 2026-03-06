@@ -1,8 +1,9 @@
 import { PajamasRepository } from "../../repositories/pajama-repository.js";
 import { PajamaSizesRepository } from "../../repositories/pajama-sizes-repository.js";
+import { PAJAMA_SIZE } from "../../@types/prisma/index.js";
 
 type SizeUpdate = {
-  size: "PP" | "P" | "M" | "G" | "GG";
+  size: PAJAMA_SIZE;
   stockQuantity: number;
 };
 
@@ -24,7 +25,6 @@ export class UpdatePajamaStockUseCase {
       return { pajama: null };
     }
 
-    // Atualiza cada tamanho informado
     for (const item of sizes) {
       await this.pajamaSizesRepository.updateStock(
         pajama.id,

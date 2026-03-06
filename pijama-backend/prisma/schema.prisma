@@ -12,6 +12,14 @@ enum USER_ROLE {
   DEFAULT
 }
 
+enum PAJAMA_SIZE {
+  PP
+  P
+  M
+  G
+  GG
+}
+
 model User {
   id        Int      @id @default(autoincrement())
   publicId  String   @unique @default(uuid()) @map("public_id")
@@ -70,7 +78,7 @@ model Pajama {
 model PajamaSize {
   id            Int    @id @default(autoincrement())
   publicId      String @unique @default(uuid()) @map("public_id")
-  size          String
+  size          PAJAMA_SIZE
   stockQuantity Int
 
   pajamaId Int

@@ -2,6 +2,7 @@
 import { Feedback } from '@/@types/prisma/index.js'
 import { feedbacksRepository } from '../../repositories/feedbacks-repository.js'
 import { UsersRepository } from '@/repositories/users-repository.js'
+import { ResourceNotFoundError } from '../errors/resource-not-found-error.js'
 
 export class DeleteFeedbacksUseCase {
 
@@ -11,20 +12,13 @@ export class DeleteFeedbacksUseCase {
     
     async execute ( idUser: string, idFeedback: string ): Promise<Feedback> {
 
-        // vamos encontrar o usuario:
         const user = await this.usersRepository.findBy( {publicId: idUser} )
-
-        // vamos checar se usuario existe:
-        if (!user) throw new Error ("Usuário não existe")
+        if (!user) throw new ResourceNotFoundError()
         
-        // vamos encontrar o feedback:
         const feedback = await this.feedbacksRepository.findBy({publicId: idFeedback })
+        if (!feedback) throw new ResourceNotFoundError()
 
-        // vamos checar se o feedback existe:
-        if (!feedback) throw new Error("O feedback não existe")
-
-        // vamos checar se o autor do feedback é o mesmo que tanta fazer a deleção:
-        if (feedback.userId != user.id) throw new Error ("Voce não tem permissão para isso")
+        if (feedback.userId !== user.id) throw new Error ("Voce não tem permissão para isso")
 
         const deletado = await this.feedbacksRepository.delete( feedback.id )
         

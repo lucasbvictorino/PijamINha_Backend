@@ -5,4 +5,6 @@ export interface addressRepository {
     create ( data: Prisma.AddressCreateInput ): Promise<Address>
 
     findBy ( where: Prisma.AddressWhereUniqueInput ): Promise<Address|null>
+
+    delete ( id: number ): Promise<Address>
 }

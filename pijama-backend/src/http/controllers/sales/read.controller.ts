@@ -7,19 +7,18 @@ import z from "zod";
 export async function readSale (request: FastifyRequest, reply: FastifyReply){
     try {
 
-        const deleteSaleBodySchema = z.object({
+        const readSaleParamsSchema = z.object({
             publicId: z.string()
         }) 
 
-        const { publicId } = deleteSaleBodySchema.parse(request.params)
+        const { publicId } = readSaleParamsSchema.parse(request.params)
 
         const readSaleUseCase = makeReadSaleUseCase()
         const venda = await readSaleUseCase.execute(publicId)
 
         return reply.status(200).send({
             message:"Venda acessada com sucesso",
-            like: SalePresenter.toHTTP(venda)
-
+            sale: SalePresenter.toHTTP(venda)
         })
 
     } catch (error){

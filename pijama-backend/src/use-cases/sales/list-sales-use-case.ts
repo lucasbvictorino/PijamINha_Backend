@@ -13,7 +13,7 @@ type listSalesUseCaseResponse = {
     currentPage: number
 }
 
-export class ListSalessUseCase {
+export class ListSalesUseCase {
 
     constructor (private saleRepository: SalesRepository) {}
 

@@ -24,8 +24,10 @@ export interface SalesRepository {
             price: number
         }[]): Promise<SaleWithAddress>
 
-    findById ( publicId: string ): Promise<SaleWithAddress | null>
+    findBy ( where: Prisma.SaleWhereUniqueInput ): Promise<SaleWithAddress | null>
     list( query: listSaleQuery ): Promise<listSalesResponse>
+    countByAddressId ( addressId: number ): Promise<number>
 
     delete ( id: number ): Promise<SaleWithAddress>
+    update ( id: number, data: Prisma.SaleUncheckedUpdateInput ): Promise<SaleWithAddress>
 }
