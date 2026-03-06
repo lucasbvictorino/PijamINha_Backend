@@ -3,8 +3,16 @@ import { appRoutes } from './http/controllers/routes.js';
 import { ZodError } from 'zod';
 import fastifyJWT from '@fastify/jwt';
 import { env } from './env/index.js';
+import fastifyCors from '@fastify/cors';
 
 export const app = fastify()
+
+app.register(fastifyCors, {
+  origin: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+})
 
 app.register(fastifyJWT, {
     secret: env.JWT_SECRET,
