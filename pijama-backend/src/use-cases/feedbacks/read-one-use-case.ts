@@ -1,5 +1,6 @@
-import type { Feedback } from "../../@types/prisma"
+import { Feedback } from '@/@types/prisma/index.js'
 import { feedbacksRepository } from '../../repositories/feedbacks-repository.js'
+import { ResourceNotFoundError } from '../errors/resource-not-found-error.js'
 
 export class ReadOneFeedbackUseCase {
 
@@ -7,11 +8,9 @@ export class ReadOneFeedbackUseCase {
     
     async execute ( idFeedback: string ): Promise<Feedback> {
 
-        // vamos encontrar o feedback:
         const feedback = await this.feedbacksRepository.findBy({publicId: idFeedback })
 
-        // vamos checar se o feedback existe:
-        if (!feedback) throw new Error("O feedback não existe")
+        if (!feedback) throw new ResourceNotFoundError()
         
         return feedback
     }

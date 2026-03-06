@@ -12,6 +12,14 @@ enum USER_ROLE {
   DEFAULT
 }
 
+enum PAJAMA_SIZE {
+  PP
+  P
+  M
+  G
+  GG
+}
+
 model User {
   id        Int      @id @default(autoincrement())
   publicId  String   @unique @default(uuid()) @map("public_id")
@@ -70,7 +78,7 @@ model Pajama {
 model PajamaSize {
   id            Int    @id @default(autoincrement())
   publicId      String @unique @default(uuid()) @map("public_id")
-  size          String
+  size          PAJAMA_SIZE
   stockQuantity Int
 
   pajamaId Int
@@ -88,6 +96,7 @@ model Sale {
   installments  Int      @default(1)
   cardNumber    String?
   totalAmount   Float
+  totalPajamas  Int 
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
@@ -105,12 +114,14 @@ model Sale {
 model Address {
   id           Int      @id @default(autoincrement())
   publicId     String   @unique @default(uuid()) @map("public_id")
+
   zipCode      String
   state        String
   city         String
   neighborhood String
-  address      String
+  address      String 
   number       String
+
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 

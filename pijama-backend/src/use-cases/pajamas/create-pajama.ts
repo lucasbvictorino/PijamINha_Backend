@@ -32,8 +32,8 @@ export class CreatePajamaUseCase {
       return createdPajama;
     });
 
-    const pajamaWithSizes = await this.pajamasRepository.findById(
-      pajama.id
+    const pajamaWithSizes = await this.pajamasRepository.findBy(
+      { id: pajama.id }
     );
 
     return {

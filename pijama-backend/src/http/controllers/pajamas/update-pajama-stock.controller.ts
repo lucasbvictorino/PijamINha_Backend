@@ -7,7 +7,7 @@ export async function updatePajamaStockController(
   reply: FastifyReply
 ) {
   const paramsSchema = z.object({
-    publicId: z.string().uuid(),
+    publicId: z.string(),
   });
 
   const bodySchema = z.object({

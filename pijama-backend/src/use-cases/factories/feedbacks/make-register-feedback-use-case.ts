@@ -1,6 +1,6 @@
-import { PrismaFeedbacksRepository } from "@/repositories/prisma/feedbacks-prisma-repository"
-import { PrismaUsersRepository } from "@/repositories/prisma/users-prisma-repository"
-import { RegisterFeedbacksUseCase } from "@/use-cases/feedbacks/register-use-case"
+import { PrismaFeedbacksRepository } from "@/repositories/prisma/feedbacks-prisma-repository.js"
+import { PrismaUsersRepository } from "@/repositories/prisma/users-prisma-repository.js"
+import { RegisterFeedbacksUseCase } from "@/use-cases/feedbacks/register-use-case.js"
 
 
 export function makeRegisterFeedbackUseCase() {

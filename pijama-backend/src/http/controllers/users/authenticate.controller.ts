@@ -1,4 +1,3 @@
-import { UserAlreadyExistsError } from "@/use-cases/errors/user-already-exists.js"
 import { makeAuthenticateUserUseCase } from "@/use-cases/factories/users/make-authenticate.js"
 import { FastifyReply, FastifyRequest } from "fastify"
 import z from "zod"
@@ -14,6 +13,8 @@ export async function authenticateUser(
             username: z.string().trim().min(1).max(100).optional(),
             email: z.email().trim().min(1).max(100).optional(),
             password: z.string().min(8).max(100),
+        }).refine((data) => data.username || data.email, {
+            message: "Username ou email deve ser fornecido"
         })
 
         const { username, email, password } = registerBodySchema.parse(request.body)

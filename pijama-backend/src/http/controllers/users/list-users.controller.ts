@@ -1,4 +1,3 @@
-import { UserAlreadyExistsError } from "@/use-cases/errors/user-already-exists.js"
 import { FastifyReply, FastifyRequest } from "fastify"
 import { UserPresenter } from "../../presenters/user-presenter.js"
 import { makeListUserUseCase } from "@/use-cases/factories/users/make-list-users.js"

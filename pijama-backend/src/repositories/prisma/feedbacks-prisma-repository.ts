@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma.js";
 import { feedbacksRepository } from "../feedbacks-repository.js";
-import { Feedback, Prisma } from "../../@types/prisma";
+import { Prisma } from "@/@types/prisma/index.js";
 
 export class PrismaFeedbacksRepository implements feedbacksRepository {
     async create ( user: { name: string, id: number }, data: { description: string, rating: number }){
@@ -35,7 +35,6 @@ export class PrismaFeedbacksRepository implements feedbacksRepository {
 
         const skip = (page-1) * limit
 
-        // filtro:
         const where: Prisma.FeedbackWhereInput = {
             rating: rating ? {
                 gte: rating

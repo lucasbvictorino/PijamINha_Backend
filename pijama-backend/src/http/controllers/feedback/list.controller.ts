@@ -1,13 +1,12 @@
-import { FeedbackPresenter } from "@/http/presenters/feedback-presenter";
+import { FeedbackPresenter } from "@/http/presenters/feedback-presenter.js";
 import { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
 import "@fastify/jwt"
-import { makeListFeedbackUseCase } from "@/use-cases/factories/feedbacks/make-list-use-case";
+import { makeListFeedbackUseCase } from "@/use-cases/factories/feedbacks/make-list-use-case.js";
 
 export async function listFeedback (request: FastifyRequest, reply: FastifyReply){
     try{
 
-        // o id publico de feedback será colhido na url
         const listBodySchema = z.object({
             rating: z.coerce.number().optional(),
             page: z.coerce.number().optional(),
@@ -22,7 +21,7 @@ export async function listFeedback (request: FastifyRequest, reply: FastifyReply
             totalPages,
             currentPage } = await listFeedbackUseCase.execute( {rating, page, limit} )
 
-        return reply.status(201).send({
+        return reply.status(200).send({
             message: "Feedback acessado com sucesso",
             feedbacks: FeedbackPresenter.toHTTP(feedbacks),
             totalCount,

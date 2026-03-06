@@ -1,4 +1,5 @@
-import { Feedback, Prisma } from "../@types/prisma"
+import { Feedback, Prisma } from "@/@types/prisma/index.js"
+
 
 interface listFeedbacksQuery {
     rating?: number

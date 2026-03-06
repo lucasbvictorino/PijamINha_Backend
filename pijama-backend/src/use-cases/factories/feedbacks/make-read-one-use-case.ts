@@ -1,9 +1,10 @@
-import { PrismaFeedbacksRepository } from "@/repositories/prisma/feedbacks-prisma-repository"
-import { ReadOneFeedbackUseCase } from "@/use-cases/feedbacks/read-one-use-case"
+import { PrismaFeedbacksRepository } from "@/repositories/prisma/feedbacks-prisma-repository.js"
+import { ReadOneFeedbackUseCase } from "@/use-cases/feedbacks/read-one-use-case.js"
+
 
 export function makeReadOneFeedbackUseCase() {
     const feedbackRepository = new PrismaFeedbacksRepository()
-    const readOneFeedbackRepository = new ReadOneFeedbackUseCase(feedbackRepository)
+    const readOneFeedbackUseCase = new ReadOneFeedbackUseCase(feedbackRepository)
 
-    return readOneFeedbackRepository
+    return readOneFeedbackUseCase
 }

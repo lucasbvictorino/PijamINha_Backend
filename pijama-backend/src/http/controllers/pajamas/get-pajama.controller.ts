@@ -7,7 +7,7 @@ export async function getPajamaController(
   reply: FastifyReply
 ) {
   const paramsSchema = z.object({
-    publicId: z.string().uuid(),
+    publicId: z.string(),
   });
 
   const { publicId } = paramsSchema.parse(request.params);
