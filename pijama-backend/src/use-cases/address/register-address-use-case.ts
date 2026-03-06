@@ -16,8 +16,14 @@ export class RegisterAddressUseCase {
 
     async execute (request: registerAddressUseCaseRequest): Promise<Address> {
 
-        const endereço = await this.addressRepository.create(request)
+        const existingAddress = await this.addressRepository.findBy(request)
 
-        return endereço
+        if (existingAddress) {
+            return existingAddress
+        }
+
+        const endereco = await this.addressRepository.create(request)
+
+        return endereco
     }
 }

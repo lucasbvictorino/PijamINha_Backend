@@ -10,8 +10,8 @@ export class PrismaAddressRepository implements addressRepository {
         })
     }
 
-    async findBy( where: Prisma.AddressWhereUniqueInput ) {
-        return await prisma.address.findUnique({ where })
+    async findBy( where: Prisma.AddressWhereInput ) {
+        return await prisma.address.findFirst({ where })
     }
 
     async delete( id: number ) {

@@ -4,7 +4,7 @@ import { Address } from "@/@types/prisma/index.js";
 export interface addressRepository {
     create ( data: Prisma.AddressCreateInput ): Promise<Address>
 
-    findBy ( where: Prisma.AddressWhereUniqueInput ): Promise<Address|null>
+    findBy ( where: Prisma.AddressWhereInput ): Promise<Address|null>
 
     delete ( id: number ): Promise<Address>
 }
