@@ -9,10 +9,10 @@
 
 ## 👥 Integrantes
 
-* **Athos Pozo** - ([https://github.com/placeholder](https://github.com/athospozo))
-* **Emanuel Fontanha** - ([https://github.com/placeholder](https://github.com/Emanuel-Fontanha))
-* **Hudson Leal** - ([https://github.com/placeholder](https://github.com/HudsonTerroso))
-* **Lucas Victorino** - ([https://github.com/placeholder](https://github.com/lucasbvictorino))
-* **Paulo Victor Barbosa** - ([https://github.com/placeholder](https://github.com/paulocoutinhodev))
-* **Pedro Kinupp** - ([https://github.com/placeholder](https://github.com/PedroKinupp))
-* **Pedro Lucas Motta** - ([https://github.com/placeholder](https://github.com/PL7dev))
+* **Athos Pozo** - ((https://github.com/athospozo))
+* **Emanuel Fontanha** - ((https://github.com/Emanuel-Fontanha))
+* **Hudson Leal** - ((https://github.com/HudsonTerroso))
+* **Lucas Victorino** - ((https://github.com/lucasbvictorino))
+* **Paulo Victor Barbosa** - ((https://github.com/paulocoutinhodev))
+* **Pedro Kinupp** - ((https://github.com/PedroKinupp))
+* **Pedro Lucas Motta** - ((https://github.com/PL7dev))
